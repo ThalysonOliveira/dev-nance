@@ -1,0 +1,19 @@
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import SignIn from "../pages/SignIn";
+import SignUp from "../pages/SignUp";
+
+export type AuthRoutesProps = {
+  SignIn: undefined;
+  SignUp: undefined;
+};
+
+const AuthStack = createNativeStackNavigator<AuthRoutesProps>();
+
+export default function AuthRoutes() {
+  return (
+    <AuthStack.Navigator>
+      <AuthStack.Screen name="SignIn" component={SignIn} />
+      <AuthStack.Screen name="SignUp" component={SignUp} />
+    </AuthStack.Navigator>
+  );
+}
