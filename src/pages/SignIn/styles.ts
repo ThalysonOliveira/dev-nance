@@ -15,20 +15,6 @@ export const Logo = styled.Image`
     margin-bottom: 25px;
 `
 
-export const AreaInput = styled.View`
-    flex-direction: row;
-`
-export const Input = styled.TextInput`
-    background-color: #FFFFFF;
-    width: 90%;
-    height: 60px;
-    font-size: 17px;
-    padding: 10px;
-    border-radius: 8px;
-    color: #121212;
-    margin-bottom: 15px;
-`
-
 export const SubmitButton = styled.TouchableOpacity`
     width: 90%;
     height: 60px;
