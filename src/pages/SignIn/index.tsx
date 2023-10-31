@@ -1,19 +1,17 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
-  AreaInput,
   Background,
   Container,
-  Input,
   Link,
   LinkText,
   Logo,
-  SubmitButton,
   SubmitText,
 } from "./styles";
 
 import { Platform } from "react-native";
 import { AuthRoutesProps } from "../../routes/auth.routes";
+import { Button, Input } from "../../components";
 
 export default function SignIn() {
   const navigation =
@@ -27,17 +25,13 @@ export default function SignIn() {
       >
         <Logo source={require("../../../assets/Logo.png")} />
 
-        <AreaInput>
-          <Input placeholder="Seu email" keyboardType="email-address" />
-        </AreaInput>
+        <Input placeholder="Seu email" keyboardType="email-address" />
 
-        <AreaInput>
-          <Input placeholder="Sua senha" />
-        </AreaInput>
+        <Input placeholder="Sua senha" />
 
-        <SubmitButton activeOpacity={0.8}>
+        <Button activeOpacity={0.8}>
           <SubmitText>Acessar</SubmitText>
-        </SubmitButton>
+        </Button>
 
         <Link onPress={() => navigation.navigate("SignUp")}>
           <LinkText>Criar um conta!</LinkText>
