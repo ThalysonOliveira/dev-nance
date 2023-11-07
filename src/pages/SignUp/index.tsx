@@ -1,4 +1,4 @@
-import { Platform } from "react-native";
+import { ActivityIndicator, Platform } from "react-native";
 import { Background, Container, SubmitText } from "../SignIn/styles";
 import { Button, Input } from "../../components";
 import { useContext, useState } from "react";
@@ -8,7 +8,7 @@ export default function SignUp() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { signUp } = useContext(AuthContext);
+  const { signUp, loadingAuth } = useContext(AuthContext);
 
   async function handleSignUp({ name, email, password }: User) {
     signUp({ name, email, password });
@@ -39,12 +39,21 @@ export default function SignUp() {
           onChangeText={(password) => setPassword(password)}
         />
 
-        <Button
-          activeOpacity={0.8}
-          onPress={() => handleSignUp({ name, email, password })}
-        >
-          <SubmitText>Cadastrar</SubmitText>
-        </Button>
+        {loadingAuth ? (
+          <Button
+            activeOpacity={0.8}
+            onPress={() => handleSignUp({ name, email, password })}
+          >
+            <ActivityIndicator size={26} color={"#FFFFFF"} />
+          </Button>
+        ) : (
+          <Button
+            activeOpacity={0.8}
+            onPress={() => handleSignUp({ name, email, password })}
+          >
+            <SubmitText>Cadastrar</SubmitText>
+          </Button>
+        )}
       </Container>
     </Background>
   );

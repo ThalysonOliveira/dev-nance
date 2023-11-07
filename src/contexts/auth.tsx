@@ -1,9 +1,9 @@
 import { ReactNode, createContext, useState } from "react";
 import { useMutation } from "react-query";
-import ApiConfig from "../services/api";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthRoutesProps } from "../routes/auth.routes";
+import { ApiConfig, getErrorResponse } from "../services";
 
 export type User = {
   name: string;
@@ -14,6 +14,7 @@ export type User = {
 type AuthContextProps = {
   user: User;
   signUp: (userInput: User) => void;
+  loadingAuth: boolean;
 };
 
 type AuthProviderProps = {
@@ -26,6 +27,7 @@ export const AuthContext = createContext<AuthContextProps>(
 
 export default function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>({} as User);
+  const [loadAuth, setLoadAuth] = useState<boolean>(false);
 
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthRoutesProps>>();
@@ -38,15 +40,19 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         password,
       });
     },
+    onError(error) {
+      return getErrorResponse(error);
+    },
   });
 
   function signUp({ name, email, password }: User) {
     createUser.mutate({ name, email, password });
+    setLoadAuth(createUser.isLoading);
     navigation.goBack();
   }
 
   return (
-    <AuthContext.Provider value={{ user, signUp }}>
+    <AuthContext.Provider value={{ user, signUp, loadingAuth: loadAuth }}>
       {children}
     </AuthContext.Provider>
   );
