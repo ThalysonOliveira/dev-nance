@@ -28,6 +28,7 @@ type AuthContextProps = {
   signIn: (authenticateInput: AuthenticateUserInput) => void;
   loadingAuth: boolean;
   signed: boolean;
+  signOut: () => void;
 };
 
 type AuthProviderProps = {
@@ -91,9 +92,20 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     setLoadAuth(false);
   }
 
+  function signOut() {
+    setUser(undefined);
+  }
+
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, signUp, signIn, loadingAuth: loadAuth }}
+      value={{
+        signed: !!user,
+        user,
+        signUp,
+        signIn,
+        signOut,
+        loadingAuth: loadAuth,
+      }}
     >
       {children}
     </AuthContext.Provider>
