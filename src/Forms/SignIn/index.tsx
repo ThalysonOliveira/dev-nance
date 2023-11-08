@@ -2,6 +2,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Button, ErrorMessage, Input } from "../../Components";
 import { SubmitText } from "../../Screens/SignIn/styles";
 import { loginUserYupResolver } from "../../Schemas";
+import { AuthenticateUserInput } from "../../Contexts/auth";
 
 const style = {
   borderWidth: 1,
@@ -13,7 +14,7 @@ export default function SignInForm() {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ email: string; password: string }>({
+  } = useForm<AuthenticateUserInput>({
     resolver: loginUserYupResolver,
   });
 

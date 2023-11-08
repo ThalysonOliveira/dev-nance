@@ -11,6 +11,17 @@ export type User = {
   password: string;
 };
 
+export type CreateUserInput = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+export type AuthenticateUserInput = {
+  email: string;
+  password: string;
+};
+
 type AuthContextProps = {
   user: User;
   signUp: (userInput: User) => void;

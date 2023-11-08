@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import { Button, ErrorMessage, Input } from "../../Components";
-import { AuthContext, User } from "../../Contexts/auth";
+import { AuthContext, CreateUserInput, User } from "../../Contexts/auth";
 import { useContext } from "react";
 import { ActivityIndicator, Text } from "react-native";
 import { SubmitText } from "../../Screens/SignIn/styles";
@@ -16,7 +16,7 @@ export default function SignUpForm() {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<User>({
+  } = useForm<CreateUserInput>({
     resolver: createUserYupResolver,
   });
 
