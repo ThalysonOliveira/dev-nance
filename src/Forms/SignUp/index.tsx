@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import { Button, ErrorMessage, Input } from "../../Components";
-import { AuthContext, CreateUserInput, User } from "../../Contexts/auth";
+import { AuthContext, CreateUserInput } from "../../Contexts/auth";
 import { useContext } from "react";
 import { ActivityIndicator, Text } from "react-native";
 import { SubmitText } from "../../Screens/SignIn/styles";
@@ -22,7 +22,7 @@ export default function SignUpForm() {
 
   const { signUp, loadingAuth } = useContext(AuthContext);
 
-  async function handleSignUp({ name, email, password }: User) {
+  async function handleSignUp({ name, email, password }: CreateUserInput) {
     signUp({ name, email, password });
   }
 
