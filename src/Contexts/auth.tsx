@@ -2,8 +2,8 @@ import { ReactNode, createContext, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { AuthRoutesProps } from "../Routes/auth.routes";
 import { ApiConfig, getErrorResponse } from "../Services";
+import { AuthRoutesProps } from "../Routes/auth.routes";
 
 export type User = {
   name: string;
@@ -23,9 +23,10 @@ export type AuthenticateUserInput = {
 };
 
 type AuthContextProps = {
-  user: User;
+  user: User | undefined;
   signUp: (userInput: User) => void;
   loadingAuth: boolean;
+  signed: boolean;
 };
 
 type AuthProviderProps = {
@@ -37,7 +38,7 @@ export const AuthContext = createContext<AuthContextProps>(
 );
 
 export default function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User>({} as User);
+  const [user, setUser] = useState<User>();
   const [loadAuth, setLoadAuth] = useState<boolean>(false);
 
   const navigation =
@@ -63,7 +64,9 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, signUp, loadingAuth: loadAuth }}>
+    <AuthContext.Provider
+      value={{ signed: !!user, user, signUp, loadingAuth: loadAuth }}
+    >
       {children}
     </AuthContext.Provider>
   );
