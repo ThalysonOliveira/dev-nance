@@ -6,9 +6,9 @@ import { ApiConfig, getErrorResponse } from "../Services";
 import { AuthRoutesProps } from "../Routes/auth.routes";
 
 export type User = {
+  id: string;
   name: string;
   email: string;
-  password: string;
 };
 
 export type CreateUserInput = {
@@ -24,7 +24,8 @@ export type AuthenticateUserInput = {
 
 type AuthContextProps = {
   user: User | undefined;
-  signUp: (userInput: User) => void;
+  signUp: (userInput: CreateUserInput) => void;
+  signIn: (authenticateInput: AuthenticateUserInput) => void;
   loadingAuth: boolean;
   signed: boolean;
 };
@@ -45,7 +46,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     useNavigation<NativeStackNavigationProp<AuthRoutesProps>>();
 
   const createUser = useMutation({
-    mutationFn: async ({ name, email, password }: User) => {
+    mutationFn: async ({ name, email, password }: CreateUserInput) => {
       await ApiConfig.post("/users", {
         name,
         email,
@@ -57,15 +58,42 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     },
   });
 
-  function signUp({ name, email, password }: User) {
+  const loginUser = useMutation({
+    mutationFn: async ({ email, password }: AuthenticateUserInput) => {
+      const { data } = await ApiConfig.post("/login", {
+        email,
+        password,
+      });
+
+      ApiConfig.defaults.headers["Authorization"] = `Bearer ${data.token}`;
+
+      setUser({
+        id: data.id,
+        name: data.name,
+        email: data.email,
+      });
+    },
+    onError(error) {
+      return getErrorResponse(error);
+    },
+  });
+
+  function signUp({ name, email, password }: CreateUserInput) {
+    setLoadAuth(true);
     createUser.mutate({ name, email, password });
-    setLoadAuth(createUser.isLoading);
+    setLoadAuth(false);
     navigation.goBack();
+  }
+
+  function signIn({ email, password }: AuthenticateUserInput) {
+    setLoadAuth(true);
+    loginUser.mutate({ email, password });
+    setLoadAuth(false);
   }
 
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, signUp, loadingAuth: loadAuth }}
+      value={{ signed: !!user, user, signUp, signIn, loadingAuth: loadAuth }}
     >
       {children}
     </AuthContext.Provider>

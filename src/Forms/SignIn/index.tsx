@@ -2,7 +2,9 @@ import { Controller, useForm } from "react-hook-form";
 import { Button, ErrorMessage, Input } from "../../Components";
 import { SubmitText } from "../../Screens/SignIn/styles";
 import { loginUserYupResolver } from "../../Schemas";
-import { AuthenticateUserInput } from "../../Contexts/auth";
+import { AuthContext, AuthenticateUserInput } from "../../Contexts/auth";
+import { useContext } from "react";
+import { ActivityIndicator } from "react-native";
 
 const style = {
   borderWidth: 1,
@@ -18,7 +20,11 @@ export default function SignInForm() {
     resolver: loginUserYupResolver,
   });
 
-  function handleSinIn() {}
+  const { signIn, loadingAuth } = useContext(AuthContext);
+
+  function handleSinIn({ email, password }: AuthenticateUserInput) {
+    signIn({ email, password });
+  }
 
   return (
     <>
@@ -54,9 +60,15 @@ export default function SignInForm() {
         <ErrorMessage>{errors.password.message}</ErrorMessage>
       )}
 
-      <Button activeOpacity={0.8} onPress={handleSubmit(handleSinIn)}>
-        <SubmitText>Acessar</SubmitText>
-      </Button>
+      {loadingAuth ? (
+        <Button>
+          <ActivityIndicator size={26} color={"#FFFFFF"} />
+        </Button>
+      ) : (
+        <Button activeOpacity={0.8} onPress={handleSubmit(handleSinIn)}>
+          <SubmitText>Acessar</SubmitText>
+        </Button>
+      )}
     </>
   );
 }
