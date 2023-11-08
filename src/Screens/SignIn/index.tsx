@@ -11,7 +11,7 @@ import {
 
 import { Platform } from "react-native";
 import { AuthRoutesProps } from "../../Routes/auth.routes";
-import { Button, Input } from "../../components";
+import { Button, Input } from "../../Components";
 
 export default function SignIn() {
   const navigation =

@@ -1,5 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
-import { Button, ErrorMessage, Input } from "../../components";
+import { Button, ErrorMessage, Input } from "../../Components";
 import { AuthContext, User } from "../../Contexts/auth";
 import { useContext } from "react";
 import { ActivityIndicator, Text } from "react-native";
