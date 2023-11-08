@@ -3,8 +3,8 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Background, Container, Link, LinkText, Logo } from "./styles";
 
 import { Platform } from "react-native";
-import { AuthRoutesProps } from "../../Routes/auth.routes";
 import SignInForm from "../../Forms/SignIn";
+import { AuthRoutesProps } from "../../Routes/auth.routes";
 
 export default function SignIn() {
   const navigation =
