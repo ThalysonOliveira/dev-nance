@@ -1,16 +1,10 @@
-import { useContext } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import { AuthContext } from "../../Contexts/auth";
+import { Background } from "./styles";
+import Header from "../../Components/Header";
 
 export default function Home() {
-  const { signOut } = useContext(AuthContext);
-
   return (
-    <View>
-      <Text>Tela Home</Text>
-      <TouchableOpacity onPress={signOut}>
-        <Text>Sair</Text>
-      </TouchableOpacity>
-    </View>
+    <Background>
+      <Header title="Minhas movimentações" />
+    </Background>
   );
 }
