@@ -1,5 +1,5 @@
+import { Header } from "../../Components";
 import { Background } from "./styles";
-import Header from "../../Components/Header";
 
 export default function Home() {
   return (
