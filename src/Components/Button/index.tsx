@@ -1,11 +1,19 @@
 import { TouchableOpacityProps } from "react-native";
-import { ButtonSubmit } from "./styles";
+import { ButtonSubmit, TextSubmit } from "./styles";
 import { ReactNode } from "react";
 
-interface ButtonPros extends TouchableOpacityProps {
+export type PropsButtonStyle = {
+  color?: string;
+};
+
+interface ButtonPros extends TouchableOpacityProps, PropsButtonStyle {
   children: ReactNode;
 }
 
 export function Button({ children, ...rest }: ButtonPros) {
-  return <ButtonSubmit {...rest}>{children}</ButtonSubmit>;
+  return (
+    <ButtonSubmit {...rest}>
+      <TextSubmit>{children}</TextSubmit>
+    </ButtonSubmit>
+  );
 }
