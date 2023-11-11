@@ -68,7 +68,7 @@ export default function Home() {
       <List
         data={historyList}
         renderItem={({ item }: any) => (
-          <HistoryList type={item.type} value={item.value} />
+          <HistoryList type={item.type} value={item.value} id={item.id} />
         )}
         showsVerticalScrollIndicator={false}
       />
