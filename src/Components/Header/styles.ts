@@ -6,7 +6,7 @@ export const Container = styled(SafeAreaView)`
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
-    margin-left: 15px;
+    margin: 25px 0 0 15px;
     width: 100%;
     max-height: 60px;
 `
