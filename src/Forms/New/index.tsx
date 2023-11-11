@@ -1,6 +1,10 @@
 import { Controller, useForm } from "react-hook-form";
 import { Button, ErrorMessage, Input, RegisterTypes } from "../../Components";
 import { newRegisterYupResolver } from "../../Schemas";
+import { useMutation } from "react-query";
+import { ApiConfig, getErrorResponse } from "../../Services";
+import { getCurrentDate } from "../../utils";
+import { Alert } from "react-native";
 
 const style = {
   borderWidth: 1,
@@ -19,6 +23,7 @@ export default function NewForm() {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<NewFormProps>({
     resolver: newRegisterYupResolver,
@@ -27,8 +32,28 @@ export default function NewForm() {
     },
   });
 
+  const createNewRegister = useMutation({
+    mutationFn: async ({ description, value, type }: NewFormProps) => {
+      await ApiConfig.post("/receive", {
+        description,
+        value,
+        type,
+        date: getCurrentDate(),
+      });
+    },
+    onError(error) {
+      return getErrorResponse(error);
+    },
+  });
+
   function handleNewForm({ description, value, type }: NewFormProps) {
-    console.log({ description, value, type });
+    createNewRegister.mutate({ description, value, type });
+    Alert.alert(type.toUpperCase(), "Novo registro efetuado com sucesso.");
+    reset({
+      description: "",
+      value: undefined,
+      type: "receita",
+    });
   }
 
   return (
