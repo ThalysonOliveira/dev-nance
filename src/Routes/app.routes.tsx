@@ -1,8 +1,10 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Home from "../Screens/Home";
+import New from "../Screens/New";
 
 export type AppDrawerRoutesProps = {
   Home: undefined;
+  New: undefined;
 };
 
 const AppDrawer = createDrawerNavigator<AppDrawerRoutesProps>();
@@ -22,6 +24,13 @@ export default function AppRoutes() {
       }}
     >
       <AppDrawer.Screen name="Home" component={Home} />
+      <AppDrawer.Screen
+        name="New"
+        component={New}
+        options={{
+          title: "Registrar",
+        }}
+      />
     </AppDrawer.Navigator>
   );
 }
