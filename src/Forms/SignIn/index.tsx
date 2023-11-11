@@ -1,6 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
 import { Button, ErrorMessage, Input } from "../../Components";
-import { SubmitText } from "../../Screens/SignIn/styles";
 import { loginUserYupResolver } from "../../Schemas";
 import { AuthContext, AuthenticateUserInput } from "../../Contexts/auth";
 import { useContext } from "react";
@@ -66,7 +65,7 @@ export default function SignInForm() {
         </Button>
       ) : (
         <Button activeOpacity={0.8} onPress={handleSubmit(handleSinIn)}>
-          <SubmitText>Acessar</SubmitText>
+          Acessar
         </Button>
       )}
     </>

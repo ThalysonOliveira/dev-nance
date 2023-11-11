@@ -3,7 +3,6 @@ import { Button, ErrorMessage, Input } from "../../Components";
 import { AuthContext, CreateUserInput } from "../../Contexts/auth";
 import { useContext } from "react";
 import { ActivityIndicator, Text } from "react-native";
-import { SubmitText } from "../../Screens/SignIn/styles";
 import { createUserYupResolver } from "../../Schemas";
 
 const style = {
@@ -80,7 +79,7 @@ export default function SignUpForm() {
         </Button>
       ) : (
         <Button activeOpacity={0.8} onPress={handleSubmit(handleSignUp)}>
-          <SubmitText>Cadastrar</SubmitText>
+          Cadastrar
         </Button>
       )}
     </>
