@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { HistoryListStyle } from ".";
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
      padding: 14px;
      background-color: #F0F3FF;
      margin-bottom: 10px;
