@@ -1,10 +1,12 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Home from "../Screens/Home";
 import New from "../Screens/New";
+import Profile from "../Screens/Profile";
 
 export type AppDrawerRoutesProps = {
   Home: undefined;
   New: undefined;
+  Profile: undefined;
 };
 
 const AppDrawer = createDrawerNavigator<AppDrawerRoutesProps>();
@@ -29,6 +31,13 @@ export default function AppRoutes() {
         component={New}
         options={{
           title: "Registrar",
+        }}
+      />
+      <AppDrawer.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: "Meu perfil",
         }}
       />
     </AppDrawer.Navigator>
