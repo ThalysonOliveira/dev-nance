@@ -5,10 +5,10 @@
 DevNance is a powerful and intuitive tool designed to simplify personal financial management. With a user-friendly interface and complete functionalities, the application aims to enable users to have complete control over their finances, facilitating monitoring, analysis and financial planning.
 
 <p align="center">
-  <img alt="Login" src="https://i.imgur.com/RQHYwuW.png" width="15%" height=450px>
-  <img alt="Tab" src="https://i.imgur.com/QWoVu7x.png" width="15%" height=450px>
-  <img alt="Home" src="https://i.imgur.com/29juMNd.png" width="15%" height=450px>
-  <img alt="Profile" src="https://i.imgur.com/yk5em4N.png" width="15%" height=450px>
+  <img alt="Login" src="https://i.imgur.com/RQHYwuW.png" width="25%" height=450px>
+  <img alt="Tab" src="https://i.imgur.com/QWoVu7x.png" width="25%" height=450px>
+  <img alt="Home" src="https://i.imgur.com/29juMNd.png" width="25%" height=450px>
+  <img alt="Profile" src="https://i.imgur.com/yk5em4N.png" width="25%" height=450px>
 </p>
 
 ## Table of Contents
@@ -41,7 +41,7 @@ git https://github.com/devfraga/backend-financas.git
 2. Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/ThalysonOliveira/how-to-testing-e2e-nodejs-with-no-frameworks.git
+git clone https://github.com/ThalysonOliveira/dev-nance.git
 ```
 
 3. Run the following command:
