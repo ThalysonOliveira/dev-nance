@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import {
   BalanceItem,
+  CalendarModal,
   Header,
   HistoryList,
   HistoryListProps,
@@ -9,7 +10,7 @@ import { Area, Background, List, ListBalance, Tittle } from "./styles";
 import { ApiConfig } from "../../Services";
 import { useState } from "react";
 import { getCurrentDate } from "../../utils";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, Modal } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 
 type Balance = {
@@ -20,6 +21,8 @@ type Balance = {
 export default function Home() {
   const [listBalance, setListBalance] = useState<Balance[]>([]);
   const [historyList, setHistoryList] = useState<HistoryListProps[]>([]);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [date, setDate] = useState(getCurrentDate());
 
   useQuery({
     queryKey: "getBalances",
@@ -38,7 +41,7 @@ export default function Home() {
     queryFn: async () => {
       const { data } = await ApiConfig.get<HistoryListProps[]>("/receives", {
         params: {
-          date: getCurrentDate(),
+          date,
         },
       });
 
@@ -59,7 +62,7 @@ export default function Home() {
       />
 
       <Area>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
           <Feather name="calendar" color={"#121212"} size={30} />
         </TouchableOpacity>
         <Tittle>Ultimas movimentações</Tittle>
@@ -72,6 +75,13 @@ export default function Home() {
         )}
         showsVerticalScrollIndicator={false}
       />
+
+      <Modal visible={modalVisible} animationType="fade" transparent={true}>
+        <CalendarModal
+          setVisibleModal={() => setModalVisible(false)}
+          setNewDate={(item) => setDate(item)}
+        />
+      </Modal>
     </Background>
   );
 }
