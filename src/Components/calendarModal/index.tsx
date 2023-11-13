@@ -38,9 +38,7 @@ export function CalendarModal({
 
     const [dateValue] = Object.keys(markedDay);
 
-    setDateNow(
-      format(new Date(dateValue).getTimezoneOffset() * 60 * 1000, "dd/MM/yyyy")
-    );
+    setDateNow(format(new Date(dateValue), "dd/MM/yyyy"));
 
     setMarkedDates(markedDay);
   }
